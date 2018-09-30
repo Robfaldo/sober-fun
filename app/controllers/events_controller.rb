@@ -3,6 +3,15 @@ class EventsController < ApplicationController
   end
 
   def create
-    render plain: params[:event].inspect
+    @event = Event.new(event_params)
+    @event.save
+
+    redirect_to @event
+  end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:title, :description, :time, :date, :location)
   end
 end
