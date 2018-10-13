@@ -5,23 +5,23 @@
 <%= form_with scope: :event, url: events_path, local: true do |form| %>
   <p>
     <%= form.label :event_title %></br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, :required => true %>
   </p>
   <p>
     <%= form.label :location %></br>
-    <%= form.text_field :location %>
+    <%= form.text_field :location, :required => true %>
   </p>
   <p>
     <%= form.label :time %></br>
-    <%= form.text_field :time %>
+    <%= form.text_field :time, :required => true %>
   </p>
   <p>
     <%= form.label :date %></br>
-    <%= form.text_field :date %>
+    <%= form.text_field :date, :required => true %>
   </p>
   <p>
     <%= form.label :description %></br>
-    <%= form.text_field :description %>
+    <%= form.text_field :description, :required => true %>
   </p>
   <p>
     <%= form.submit %>
