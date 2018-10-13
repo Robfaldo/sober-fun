@@ -22,8 +22,9 @@
       <td><%= event.time %></td>
       <td><%= event.date %></td>
       <td><%= link_to 'Show', event_path(event) %></td>
-      <td><%= link_to 'Delete', event_path(event), method: 'delete' %></td>
-
+      <% if current_user == event.user %>
+        <td><%= link_to 'Delete', event_path(event), method: 'delete' %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
