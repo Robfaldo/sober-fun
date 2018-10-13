@@ -1,7 +1,7 @@
 <%= link_to 'Event listings', controller: 'events' %>
-<%= link_to 'Add event', new_event_path %>
 
 <% if user_signed_in? %>
+  <%= link_to 'Add event', new_event_path %>
   <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
 <% end %>
 
