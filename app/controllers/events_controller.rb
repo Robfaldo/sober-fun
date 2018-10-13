@@ -10,8 +10,15 @@ class EventsController < ApplicationController
   def new
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+
+    redirect_to events_index_path
+  end
+
   def create
-    @event = Event.new(event_params)
+    @event = current_user.events.build(event_params)
     @event.save
 
     redirect_to @event

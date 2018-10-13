@@ -5,6 +5,7 @@
 <table>
   <tr>
     <th>Event Title</th>
+    <th>Event creator</th>
     <th>Description</th>
     <th>Location</th>
     <th>Time</th>
@@ -15,11 +16,14 @@
   <% @events.each do |event| %>
     <tr>
       <td><%= event.title %></td>
+      <td><%= event.user.email %></td>
       <td><%= event.description %></td>
       <td><%= event.location %></td>
       <td><%= event.time %></td>
       <td><%= event.date %></td>
       <td><%= link_to 'Show', event_path(event) %></td>
+      <td><%= link_to 'Delete', event_path(event), method: 'delete' %></td>
+
     </tr>
   <% end %>
 </table>
