@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   # https://medium.com/@sherzelsmith/add-a-filtering-multiple-tag-system-with-autocomplete-to-your-rails-model-in-rails-5-1bf88cd53e9
   belongs_to :user
-  validates :title, :description, :location, :time, :date, :presence => true
+  validates :title, :price, :description, :location, :time, :date, :presence => true
   has_many :taggings
   has_many :tags, through: :taggings
 
