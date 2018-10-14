@@ -22,6 +22,8 @@
       <td><%= event.time %></td>
       <td><%= event.date %></td>
       <td><%= link_to 'Show', event_path(event) %></td>
+      <td>Tags: <%= raw event.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %></td>
+
       <% if current_user == event.user %>
         <td><%= link_to 'Delete', event_path(event), method: 'delete' %></td>
       <% end %>
