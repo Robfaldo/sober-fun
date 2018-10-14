@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    params[:tag] ? @events = Event.tagged_with(params[:tag]) : @events = Event.all
   end
 
   def show
@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    @event = Event.new
   end
 
   def destroy
@@ -19,14 +20,16 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-    @event.save
-
-    redirect_to @event
+    if @event.save
+      redirect_to @event
+    else
+      render :new
+    end
   end
 
   private
 
   def event_params
-    params.require(:event).permit(:title, :description, :time, :date, :location)
+    params.require(:event).permit(:title, :description, :time, :date, :location, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
   end
 end
