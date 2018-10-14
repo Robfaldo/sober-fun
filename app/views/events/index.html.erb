@@ -3,23 +3,27 @@
 <div id="events-title"><h1>Events</h1></div>
 
 <div class="container">
-  <% @events.each do |event| %>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="/assets/placeholder.jpg" alt="Card image cap">
-      <div class="card-body width">
-        <h5 class="card-title"><%= event.title %> </h5>
-        <span><%= event.date %> at <%= event.time %></span></br>
-        <span>Price: <%= event.price %></span></br>
-        <span>Location: £<%= event.price %></span></br></br>
-        <p class="card-text"><%= event.description.truncate(100) %></p>
-        <% if event.tags.count > 0 %>
-          <p>Tags: <%= raw event.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %></p>
-        <% end %>
-        <%= link_to 'Event Details', event_path(event), :class => "btn btn-primary"%>
-        <% if current_user == event.user %>
-          <%= link_to 'Delete', event_path(event), method: 'delete' %>
-        <% end %>
-      </div>
+  <div class="card-deck">
+    <div class="card-columns">
+      <% @events.each do |event| %>
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="/assets/placeholder.jpg" alt="Card image cap">
+          <div class="card-body width">
+            <h5 class="card-title"><%= event.title %> </h5>
+            <span><%= event.date %> at <%= event.time %></span></br>
+            <span>Price: <%= event.price %></span></br>
+            <span>Location: £<%= event.price %></span></br></br>
+            <p class="card-text"><%= event.description.truncate(100) %></p>
+            <% if event.tags.count > 0 %>
+              <p>Tags: <%= raw event.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %></p>
+            <% end %>
+            <%= link_to 'Event Details', event_path(event), :class => "btn btn-primary"%>
+            <% if current_user == event.user %>
+              <%= link_to 'Delete', event_path(event), method: 'delete' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
