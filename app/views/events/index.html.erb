@@ -2,7 +2,23 @@
 
 <div id="events-title"><h1>Events</h1></div>
 
-<div class="container">
+<div class="field">
+  <% @tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag.name) %></br>
+  <% end %>
+</div>
+
+<%= form_tag("/search", method: "get") do %>
+    <% @price_filters.each do |price_filter| %>
+        <ul>
+          <%= check_box_tag "price_filters[]", price_filter %>
+          <%= price_filter %>
+        </ul>
+    <% end %>
+    <%= submit_tag("Search") %>
+<% end %>
+
+<div class="container" id="events-list">
   <div class="card-deck">
     <div class="card-columns">
       <% @events.each do |event| %>

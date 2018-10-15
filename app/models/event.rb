@@ -4,6 +4,20 @@ class Event < ApplicationRecord
   validates :title, :price, :description, :location, :time, :date, :presence => true
   has_many :taggings
   has_many :tags, through: :taggings
+  scope :free, -> { where(price: 0) }
+  scope :under10, -> { where('price > 0 AND price <= 10') }
+  scope :ten_to_thirty, -> { where('price > 10 AND price <= 30') }
+
+  SAFE_PARAMS = ['free', 'under10', 'ten_to_thirty']
+
+  def self.price_filter(*filter_params)
+    events = []
+    filter_params.first.each do |filter|
+      raise 'not a safe param' unless SAFE_PARAMS.include?(filter)
+      events.push(eval(filter))
+    end
+    return events
+  end
 
   def self.tagged_with(name)
     Tag.find_by!(name: name).events
