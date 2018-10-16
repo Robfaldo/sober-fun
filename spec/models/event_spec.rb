@@ -17,7 +17,17 @@ RSpec.describe Event, type: :model do
           event = create_event_with_price(0.00, user)
 
           result = Event.price_filter(['free']).first
-          
+
+          expect(result).to include(event)
+          expect(result.length).to be(2)
+        end
+      end
+      context 'when given "under10"' do
+        it 'returns the event that costs between £0 and £10' do
+          event = create_event_with_price(8.00, user)
+
+          result = Event.price_filter(['under10']).first
+
           expect(result).to include(event)
           expect(result.length).to be(2)
         end
