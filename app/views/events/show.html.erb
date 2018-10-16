@@ -22,5 +22,5 @@
 </p>
 <p>
   <strong>Price:</strong>
-  <%= @event.price %>
+  £<%= number_with_precision(@event.price / 100.to_d, precision: 2) %>
 </p>
