@@ -42,6 +42,13 @@ RSpec.describe Event, type: :model do
           expect(result.length).to be(2)
         end
       end
+      context 'when given a rogue parameter' do
+        it 'raises error' do
+          event = create_event_with_price(22.00, user)
+
+          expect{ Event.price_filter(['rogue_param']) }.to raise_error
+        end
+      end
     end
   end
 
