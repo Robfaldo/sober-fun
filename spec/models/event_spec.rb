@@ -7,14 +7,14 @@ RSpec.describe Event, type: :model do
 
     context 'when there is a mixture of event prices in DB' do
       before(:each) do
-        create_event_with_price(0.00, user)
-        create_event_with_price(5.00, user)
-        create_event_with_price(15.00, user)
+        create_event_with_price(0, user)
+        create_event_with_price(500, user)
+        create_event_with_price(1500, user)
       end
 
       context 'when given "free"' do
         it 'returns the free event' do
-          event = create_event_with_price(0.00, user)
+          event = create_event_with_price(0, user)
 
           result = Event.price_filter(['free']).first
 
@@ -24,7 +24,7 @@ RSpec.describe Event, type: :model do
       end
       context 'when given "under10"' do
         it 'returns the event that costs between £0 and £10' do
-          event = create_event_with_price(8.00, user)
+          event = create_event_with_price(800, user)
 
           result = Event.price_filter(['under10']).first
 
@@ -34,7 +34,7 @@ RSpec.describe Event, type: :model do
       end
       context 'when given "ten_to_thirty"' do
         it 'returns the event that costs between £10 and £30' do
-          event = create_event_with_price(22.00, user)
+          event = create_event_with_price(2200, user)
 
           result = Event.price_filter(['ten_to_thirty']).first
 
@@ -44,7 +44,7 @@ RSpec.describe Event, type: :model do
       end
       context 'when given a rogue parameter' do
         it 'raises error' do
-          event = create_event_with_price(22.00, user)
+          event = create_event_with_price(2200, user)
 
           expect{ Event.price_filter(['rogue_param']) }.to raise_error
         end

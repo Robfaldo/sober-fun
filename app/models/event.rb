@@ -5,8 +5,8 @@ class Event < ApplicationRecord
   has_many :taggings
   has_many :tags, through: :taggings
   scope :free, -> { where(price: 0) }
-  scope :under10, -> { where('price > 0 AND price <= 10') }
-  scope :ten_to_thirty, -> { where('price > 10 AND price <= 30') }
+  scope :under10, -> { where('price > 0 AND price <= 1000') }
+  scope :ten_to_thirty, -> { where('price > 1000 AND price <= 3000') }
 
   SAFE_PARAMS = ['free', 'under10', 'ten_to_thirty']
 
