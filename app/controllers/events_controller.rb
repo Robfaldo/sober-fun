@@ -27,7 +27,8 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    updated_params = convert_params_price_to_pennies(event_params)
+    @event = current_user.events.build(updated_params)
     if @event.save
       redirect_to @event
     else
@@ -39,5 +40,13 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :price, :description, :time, :date, :location, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
+  end
+
+  def convert_params_price_to_pennies(event_params)
+    params = event_params
+    price_calculator = EventsHelper::PriceCalculator.new
+    price_in_pennies = price_calculator.convert_pounds_to_pennies(params[:price].to_d)
+    params["price"] = price_in_pennies.to_s
+    params
   end
 end
