@@ -16,3 +16,10 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
+
+$(document).ready(() =>
+  $("#search_form").on("ajax:success", function(event) {
+    const [data, status, xhr] = Array.from(event.detail);
+    return $('.log').append(xhr.responseText);
+  }).on("ajax:error", event => $("#new_article").append("<p>ERROR</p>"))
+);

@@ -11,8 +11,8 @@ class EventsController < ApplicationController
 
   def search
     # TODO: use strong params for the price_filters (too tired but NEED to do it)
-    @events = Event.price_filter(params[:price_filters])
-    render html: @events
+    # @events = Event.price_filter(params[:price_filters])
+    render :json => {:test_message => 'hello'}, :status => 200
   end
 
   def new

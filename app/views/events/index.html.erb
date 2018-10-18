@@ -8,15 +8,17 @@
   <% end %>
 </div>
 
-<%= form_tag("/search", method: "get") do %>
+<%= form_tag "/search", method: "get", remote: true, id: 'search_form' do %>
     <% @price_filters.each do |price_filter| %>
         <ul>
           <%= check_box_tag "price_filters[]", price_filter %>
           <%= price_filter %>
         </ul>
     <% end %>
-    <%= submit_tag("Search") %>
+    <%= submit_tag "Search" %>
 <% end %>
+
+<div class='log'> Text should go here on ajax success </div>
 
 <div class="container" id="events-list">
   <div class="card-deck">
